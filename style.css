@@ -11,9 +11,12 @@
     height: 90px;
     width: auto;
     font-size: 48px;
-    align-self: flex-end;
+    text-align: right;
     padding-top: 30px;
+}
 
+input::placeholder {
+    color: black;
 }
 
 .calculator-buttons {
