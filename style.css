@@ -25,9 +25,10 @@ margin: auto;
 }
 
 .operator-buttons {
-    display: flex;
-    flex-direction: column;
-    margin: auto;    
+    margin: auto;
+    min-width: 144px;
+    min-height: 240px;
+      
 }
 
 .number-buttons button {
