@@ -16,6 +16,11 @@ const populateDisplay = function() {
     return +(display.textContent);
 }
 
+//Add on-click function to number buttons
+for (const num of number) {
+    num.addEventListener('click', populateDisplay);
+}
+
 //Create basic calculator functions
 const add = function (x, y) {
     return x + y;
@@ -33,6 +38,14 @@ const divide = function (x, y) {
 }
 
 const operate = function (num1, operator, num2) {
+    operatorBtns.forEach((button) => {
+        button.addEventListener('click', () => {
+            displayValue = display.textContent;
+            num1 = displayValue;
+            operator = event.target.textContent;
+            alert(num1);
+        })
+    })
 if (operator === '+') add(num1, num2);
 if (operator === '-') subtract (num1, num2);
 if (operator === '*') multiply (num1, num2);
