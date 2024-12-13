@@ -27,7 +27,7 @@ input::placeholder {
 margin: auto;
 }
 
-.operator-buttons {
+.operator-panel {
     margin: auto;
     min-width: 144px;
     min-height: 240px;
@@ -39,7 +39,7 @@ margin: auto;
     height: 60px;
 }
 
-.operator-buttons button {
+.operator-panel button {
     width: 70px;
     height: 80px;
 }
