@@ -9,8 +9,7 @@ const arithmeticSign = document.querySelector(".number-panel > .arithmetic-sign"
 const operatorBtns = document.querySelectorAll(".operator-buttons > div > button");
 const equal = document.querySelector(".equal-button");
 const clear = document.querySelector(".clear-button");
-let result = 0;
-
+let result;
 
 //Create function that populates display
 const populateDisplay = function() {
@@ -40,53 +39,69 @@ arithmeticSign.addEventListener('click', () => {
 
 //Create basic calculator functions
 const add = function (x, y) {
-    result = x + y;
-    return result;
+    return x + y;
 }
 
 const subtract = function (x, y) {
-    result = x - y;
-    return result;
+    return x - y;
 }
 
 const multiply = function (x, y) {
-    result = x * y;
-    return result;
+    return x * y;
 }
 
 const divide = function (x, y) {
-    result = x / y;
-    return result;
+    if (y === 0) {return display.value = "Impossible!"}
+    else return x / y
 }
 
 //Add on click function to operator buttons
 operatorBtns.forEach((button) => {
-//Add lines that call appropriate operator function on-click
-//that will operate on num1 and display.value
     button.addEventListener('click', () => {
+        if(operator === undefined) {
         displayValue = +display.value;
-        num1 = displayValue;
         operator = event.target.textContent;
+        num1 = displayValue;
         display.value = '';
         document.querySelector(".display").placeholder = num1;
+        }
+
+        else {
+            displayValue = +display.value;
+            num2 = displayValue;
+            result = operate(operator, num1, num2);
+            display.value = result.toFixed(5);
+            operator = event.target.textContent;
+            displayValue = +display.value;
+            num1 = displayValue;
+            display.value = '';
+            document.querySelector(".display").placeholder = num1;
+        }
     })
 })
 
-equal.addEventListener('click', () => {
+equal.addEventListener('click', () => {    
     displayValue = +display.value;
     num2 = displayValue;
-    display.value = operate(num1, operator, num2);
+    result = operate(operator, num1, num2);
+    display.value = result.toFixed(5);
+    displayValue = +display.value;
+    display.value = '';
+    document.querySelector(".display").placeholder = displayValue;
+   // num1 = displayValue;
+    //operator = undefined;
+    //num2 = 0;
 })
 
 clear.addEventListener('click', () => {
     display.value = '';
     num1 = 0;
     num2 = 0;
-    operator = '';
+    operator = undefined;
     document.querySelector(".display").placeholder = 0;
 })
 
-const operate = function (num1, operator, num2) {
+const operate = function (operator, num1, num2) {
 if (operator === '+') return add(num1, num2);
 if (operator === '-') return subtract (num1, num2);
 if (operator === '*') return multiply (num1, num2);
