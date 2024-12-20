@@ -3,10 +3,11 @@ let num2 = 0;
 let operator;
 let displayValue;
 const display = document.querySelector(".display");
-const number = document.querySelectorAll(".number-panel > .number");
-const decimalPoint = document.querySelector(".number-panel > .decimal")
-const arithmeticSign = document.querySelector(".number-panel > .arithmetic-sign")
-const operatorBtns = document.querySelectorAll(".operator-buttons > div > button");
+const backspace = document.querySelector(".backspace");
+const number = document.querySelectorAll(".number");
+const decimalPoint = document.querySelector(".decimal")
+const arithmeticSign = document.querySelector(".arithmetic-sign")
+const operatorBtns = document.querySelectorAll(".operator-buttons > button");
 const equal = document.querySelector(".equal-button");
 const clear = document.querySelector(".clear-button");
 let result;
@@ -16,6 +17,13 @@ const populateDisplay = function() {
     display.value += event.target.textContent;
     return display.value;
 }
+
+//Add on-click function to backspace button
+backspace.addEventListener('click', () => {
+    displayValue = display.value;
+    displayValue = displayValue.slice(0, -1);
+    display.value = displayValue;
+})
 
 //Add on-click function to number buttons
 for (const num of number) {
@@ -32,9 +40,11 @@ decimalPoint.addEventListener('click', () => {
 
 //Add on-click function to arithmetic sign
 arithmeticSign.addEventListener('click', () => {
+   if(display.value < 0 || display.value >0) {
     displayValue = +display.value;
     displayValue = -displayValue;
     display.value = displayValue;
+   }
 })
 
 //Create basic calculator functions
@@ -101,9 +111,10 @@ clear.addEventListener('click', () => {
     document.querySelector(".display").placeholder = 0;
 })
 
+
 const operate = function (operator, num1, num2) {
 if (operator === '+') return add(num1, num2);
 if (operator === '-') return subtract (num1, num2);
 if (operator === '*') return multiply (num1, num2);
-if (operator === '/') return divide (num1, num2);
+if (operator === '÷') return divide (num1, num2);
 }
