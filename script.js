@@ -10,7 +10,8 @@ const arithmeticSign = document.querySelector(".arithmetic-sign")
 const operatorBtns = document.querySelectorAll(".operator-buttons > button");
 const equal = document.querySelector(".equal-button");
 const clear = document.querySelector(".clear-button");
-let result;
+
+document.querySelector(".display").readOnly = true;
 
 //Create function that populates display
 const populateDisplay = function() {
@@ -79,8 +80,7 @@ operatorBtns.forEach((button) => {
         else {
             displayValue = +display.value;
             num2 = displayValue;
-            result = operate(operator, num1, num2);
-            display.value = result.toFixed(5);
+            display.value = operate(operator, num1, num2).toFixed(5);
             operator = event.target.textContent;
             displayValue = +display.value;
             num1 = displayValue;
@@ -93,14 +93,10 @@ operatorBtns.forEach((button) => {
 equal.addEventListener('click', () => {    
     displayValue = +display.value;
     num2 = displayValue;
-    result = operate(operator, num1, num2);
-    display.value = result.toFixed(5);
+    display.value = operate(operator, num1, num2).toFixed(5);
     displayValue = +display.value;
-    display.value = '';
-    document.querySelector(".display").placeholder = displayValue;
-   // num1 = displayValue;
-    //operator = undefined;
-    //num2 = 0;
+    num1 = displayValue;
+    operator = undefined;
 })
 
 clear.addEventListener('click', () => {
