@@ -15,6 +15,7 @@ document.querySelector(".display").readOnly = true;
 
 //Create function that populates display
 const populateDisplay = function() {
+    if(!(display.value.length === 11))
     display.value += event.target.textContent;
     return display.value;
 }
