@@ -20,9 +20,10 @@ const populateDisplay = function() {
 }
 
 //Add on-click function to backspace button
-backspace.addEventListener('click', () => {
-    display.value = display.value.slice(0, -1);
-})
+const deleteLastDigit = function() {
+    display.value = display.value.slice(0, -1)
+}
+backspace.addEventListener('click', deleteLastDigit);
 
 //Add on-click function to number buttons
 for (const num of number) {
@@ -30,18 +31,20 @@ for (const num of number) {
 }
 
 //Add on-click function to decimal button
-decimalPoint.addEventListener('click', () => {
+const addDecimalPoint = function() {
     if (!display.value.includes(".")) {
         display.value += ".";
     }
-})
+}
+decimalPoint.addEventListener('click', addDecimalPoint);
 
 //Add on-click function to arithmetic sign
-arithmeticSign.addEventListener('click', () => {
-   if(display.value < 0 || display.value >0) {
-    display.value = -display.value;
-   }
-})
+const negateNumber = function() {
+    if(display.value < 0 || display.value >0) {
+        display.value = -display.value;
+       }
+}
+arithmeticSign.addEventListener('click', negateNumber)
 
 //Create basic calculator functions
 const add = function (x, y) {
@@ -62,9 +65,8 @@ const divide = function (x, y) {
 }
 
 //Add on click function to operator buttons
-operatorBtns.forEach((button) => {
-    button.addEventListener('click', () => {
-        if(operator === null) {
+const setOperator = function() {
+    if(operator === null) {
         operator = event.target.textContent;
         num1 = display.value;
         display.value = '';
@@ -79,23 +81,27 @@ operatorBtns.forEach((button) => {
             display.value = '';
             document.querySelector(".display").placeholder = num1;
         }
-    })
+}
+operatorBtns.forEach((button) => {
+    button.addEventListener('click', setOperator)
 })
 
-equal.addEventListener('click', () => {    
+const calculate = function() {
     num2 = display.value
     display.value = operate(operator, num1, num2).toFixed(5);
     num1 = display.value;
     operator = null;
-})
+}
+equal.addEventListener('click', calculate);
 
-clear.addEventListener('click', () => {
+const clearAll = function() {
     display.value = '';
     num1 = 0;
     num2 = 0;
     operator = null;
     document.querySelector(".display").placeholder = 0;
-})
+}
+clear.addEventListener('click', clearAll)
 
 const operate = function (operator, num1, num2) {
 num1 = Number(num1);
