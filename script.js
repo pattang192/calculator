@@ -32,7 +32,10 @@ for (const num of number) {
 
 //Add on-click function to decimal button
 const addDecimalPoint = function() {
-    if (!display.value.includes(".")) {
+    if(display.value == '') {
+        display.value = "0.";
+    }
+    if(!display.value.includes(".")) {
         display.value += ".";
     }
 }
@@ -60,17 +63,17 @@ const multiply = function (x, y) {
 }
 
 const divide = function (x, y) {
-    if (y === 0) {return display.value = "Impossible!"}
+    if (y === 0) {return display.value = "Can't divide by 0"}
     else return x / y
 }
 
-//Add on click function to operator buttons
+//On click functions for operator buttons
 const setOperator = function() {
     if(operator === null) {
         operator = event.target.textContent;
         num1 = display.value;
         display.value = '';
-        document.querySelector(".display").placeholder = num1;
+        display.placeholder = num1;
         }
 
         else {
