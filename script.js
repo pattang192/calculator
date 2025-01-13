@@ -10,12 +10,12 @@ const operatorBtns = document.querySelectorAll(".operator-buttons > button");
 const equal = document.querySelector(".equal-button");
 const clear = document.querySelector(".clear-button");
 
-document.querySelector(".display").readOnly = true;
+//display.addEventListener("keydown", handleKeyboardEvent)
 
 //Create function that populates display
-const populateDisplay = function() {
+const populateDisplay = function(number) {
     if(!(display.value.length === 11))
-    display.value += event.target.textContent;
+    display.value += number;
     return display.value;
 }
 
@@ -27,7 +27,7 @@ backspace.addEventListener('click', deleteLastDigit);
 
 //Add on-click function to number buttons
 for (const num of number) {
-    num.addEventListener('click', populateDisplay);
+    num.addEventListener('click', () => populateDisplay(num.textContent));
 }
 
 //Add on-click function to decimal button
@@ -68,9 +68,9 @@ const divide = function (x, y) {
 }
 
 //On click functions for operator buttons
-const setOperator = function() {
+const setOperator = function(button) {
     if(operator === null) {
-        operator = event.target.textContent;
+        operator = button;
         num1 = display.value;
         display.value = '';
         display.placeholder = num1;
@@ -79,14 +79,14 @@ const setOperator = function() {
         else {
             num2 = display.value;
             display.value = operate(operator, num1, num2).toFixed(5);
-            operator = event.target.textContent;
+            operator = button;
             num1 = display.value;
             display.value = '';
-            document.querySelector(".display").placeholder = num1;
+            display.placeholder = num1;
         }
 }
 operatorBtns.forEach((button) => {
-    button.addEventListener('click', setOperator)
+    button.addEventListener('click', () => setOperator(button.textContent))
 })
 
 const calculate = function() {
@@ -102,7 +102,7 @@ const clearAll = function() {
     num1 = 0;
     num2 = 0;
     operator = null;
-    document.querySelector(".display").placeholder = 0;
+    display.placeholder = 0;
 }
 clear.addEventListener('click', clearAll)
 
@@ -111,6 +111,6 @@ num1 = Number(num1);
 num2 = Number(num2);
 if (operator === '+') return add(num1, num2);
 if (operator === '-') return subtract (num1, num2);
-if (operator === '*') return multiply (num1, num2);
+if (operator === 'x') return multiply (num1, num2);
 if (operator === '÷') return divide (num1, num2);
 }
