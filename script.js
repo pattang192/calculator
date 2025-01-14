@@ -10,8 +10,6 @@ const operatorBtns = document.querySelectorAll(".operator-buttons > button");
 const equal = document.querySelector(".equal-button");
 const clear = document.querySelector(".clear-button");
 
-//display.addEventListener("keydown", handleKeyboardEvent)
-
 //Create function that populates display
 const populateDisplay = function(number) {
     if(!(display.value.length === 11))
@@ -113,4 +111,27 @@ if (operator === '+') return add(num1, num2);
 if (operator === '-') return subtract (num1, num2);
 if (operator === 'x') return multiply (num1, num2);
 if (operator === '÷') return divide (num1, num2);
+}
+
+const handleKeyboardEvent = function (event) {
+    console.log(event.key)
+    if(0 <= event.key && event.key <= 9) populateDisplay(event.key)
+    if(event.key === '.') addDecimalPoint();
+    if(event.key === 'Backspace') deleteLastDigit();
+    if(event.key === 'Escape') clearAll();
+    if(event.key === '/' || event.key === '*' || 
+        event.key === '-' || event.key === '+') setOperator(convertOperator(event.key));
+    if(event.key === '=' || event.key === 'Enter') calculate();
+}
+
+window.addEventListener("keydown", handleKeyboardEvent)
+
+const convertOperator = function (keyboardOperator) {
+    if(keyboardOperator === '/') return '÷';
+    if(keyboardOperator === '*') return 'x';
+    if(keyboardOperator === '-') return '-';
+    if(keyboardOperator === '+') return '+';
+
+
+
 }
