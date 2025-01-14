@@ -76,7 +76,7 @@ const setOperator = function(button) {
 
         else {
             num2 = display.value;
-            display.value = operate(operator, num1, num2).toFixed(5);
+            display.value = roundResult(operate(operator, num1, num2));
             operator = button;
             num1 = display.value;
             display.value = '';
@@ -89,7 +89,7 @@ operatorBtns.forEach((button) => {
 
 const calculate = function() {
     num2 = display.value
-    display.value = operate(operator, num1, num2).toFixed(5);
+    display.value = roundResult(operate(operator, num1, num2));
     num1 = display.value;
     operator = null;
 }
@@ -131,7 +131,8 @@ const convertOperator = function (keyboardOperator) {
     if(keyboardOperator === '*') return 'x';
     if(keyboardOperator === '-') return '-';
     if(keyboardOperator === '+') return '+';
+}
 
-
-
+const roundResult = function (number) {
+    return Math.round(number * 1000) / 1000
 }
