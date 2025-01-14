@@ -1,5 +1,5 @@
-let num1 = 0;
-let num2 = 0;
+let num1 = '';
+let num2 = '';
 let operator = null;
 const display = document.querySelector(".display");
 const backspace = document.querySelector(".backspace");
@@ -88,17 +88,20 @@ operatorBtns.forEach((button) => {
 })
 
 const calculate = function() {
-    num2 = display.value
+    if(operator === null && num1 === '') return;
+    else if(num2 === '') display.value = num1;
+    else {num2 = display.value
     display.value = roundResult(operate(operator, num1, num2));
     num1 = display.value;
     operator = null;
+    }
 }
 equal.addEventListener('click', calculate);
 
 const clearAll = function() {
     display.value = '';
-    num1 = 0;
-    num2 = 0;
+    num1 = '';
+    num2 = '';
     operator = null;
     display.placeholder = 0;
 }
