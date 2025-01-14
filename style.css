@@ -35,8 +35,12 @@ input::placeholder {
 display: flex;
 }
 
-.number-panel button, .operator-panel button{
+.number-panel button, .operator-panel button {
     height: 62px;
     width: 90px;
+}
+
+.number-panel .clear-button {
+width: 180px;
 }
 
