@@ -89,7 +89,6 @@ operatorBtns.forEach((button) => {
 
 const calculate = function() {
     if(operator === null && num1 === '') return;
-    else if(num2 === '') display.value = num1;
     else {num2 = display.value
     display.value = roundResult(operate(operator, num1, num2));
     num1 = display.value;
@@ -117,7 +116,6 @@ if (operator === '÷') return divide (num1, num2);
 }
 
 const handleKeyboardEvent = function (event) {
-    console.log(event.key)
     if(0 <= event.key && event.key <= 9) populateDisplay(event.key)
     if(event.key === '.') addDecimalPoint();
     if(event.key === 'Backspace') deleteLastDigit();
